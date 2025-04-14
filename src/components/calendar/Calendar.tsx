@@ -1,17 +1,17 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import { Modal } from "@/components/ui/modal";
+import { useModal } from "@/hooks/useModal";
 import {
-  EventInput,
   DateSelectArg,
   EventClickArg,
   EventContentArg,
+  EventInput,
 } from "@fullcalendar/core";
-import { useModal } from "@/hooks/useModal";
-import { Modal } from "@/components/ui/modal";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import React, { useEffect, useRef, useState } from "react";
 
 interface CalendarEvent extends EventInput {
   extendedProps: {
@@ -73,7 +73,7 @@ const Calendar: React.FC = () => {
   const handleEventClick = (clickInfo: EventClickArg) => {
     const event = clickInfo.event;
     setSelectedEvent(event as unknown as CalendarEvent);
-    setEventTitle(event.title);
+    setEventTitle(event.title); 
     setEventStartDate(event.start?.toISOString().split("T")[0] || "");
     setEventEndDate(event.end?.toISOString().split("T")[0] || "");
     setEventLevel(event.extendedProps.calendar);

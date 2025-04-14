@@ -1,15 +1,15 @@
 "use client";
-import React, { useState } from "react";
-import ComponentCard from "../../common/ComponentCard";
-import Label from "../Label";
-import Input from "../input/InputField";
-import Select from "../Select";
-import Radio from "../input/Radio";
-import Form from "../Form";
-import { CalenderIcon } from "../../../icons";
-import Button from "../../ui/button/Button";
-import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/light.css";
+import React, { useState } from "react";
+import Flatpickr from "react-flatpickr";
+import { CalenderIcon } from "../../../icons";
+import ComponentCard from "../../common/ComponentCard";
+import Button from "../../ui/button/Button";
+import Form from "../Form";
+import Label from "../Label";
+import Select from "../Select";
+import Input from "../input/InputField";
+import Radio from "../input/Radio";
 
 export default function ExampleFormTwo() {
   const [selectedOption, setSelectedOption] = useState<string>("Free");

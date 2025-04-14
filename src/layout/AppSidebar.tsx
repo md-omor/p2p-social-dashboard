@@ -1,23 +1,19 @@
 "use client";
-import React, { useEffect, useRef, useState,useCallback } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
-  CalenderIcon,
   ChevronDownIcon,
   GridIcon,
   HorizontaLDots,
   ListIcon,
-  PageIcon,
-  PieChartIcon,
   PlugInIcon,
   TableIcon,
-  UserCircleIcon,
+  UserCircleIcon
 } from "../icons/index";
-import SidebarWidget from "./SidebarWidget";
 
 type NavItem = {
   name: string;
@@ -33,48 +29,55 @@ const navItems: NavItem[] = [
     subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
   {
-    icon: <CalenderIcon />,
-    name: "Calendar",
-    path: "/calendar",
-  },
-  {
     icon: <UserCircleIcon />,
-    name: "User Profile",
+    name: "Admin Profile",
     path: "/profile",
   },
 
   {
-    name: "Forms",
+    name: "Weekly Challenges",
     icon: <ListIcon />,
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
-    name: "Tables",
+    name: "Nofication ",
+    icon: <ListIcon />,
+    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+  },
+  {
+    name: "Users",
     icon: <TableIcon />,
     subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
   },
+
   {
-    name: "Pages",
-    icon: <PageIcon />,
-    subItems: [
-      { name: "Blank Page", path: "/blank", pro: false },
-      { name: "404 Error", path: "/error-404", pro: false },
-    ],
+    icon: <UserCircleIcon />,
+    name: "Message",
+    path: "/profile",
   },
+  
+  // {
+  //   name: "Pages",
+  //   icon: <PageIcon />,
+  //   subItems: [
+  //     { name: "Blank Page", path: "/blank", pro: false },
+  //     { name: "404 Error", path: "/error-404", pro: false },
+  //   ],
+  // },
 ];
 
 const othersItems: NavItem[] = [
-  {
-    icon: <PieChartIcon />,
-    name: "Charts",
-    subItems: [
-      { name: "Line Chart", path: "/line-chart", pro: false },
-      { name: "Bar Chart", path: "/bar-chart", pro: false },
-    ],
-  },
+  // {
+  //   icon: <PieChartIcon />,
+  //   name: "Charts",
+  //   subItems: [
+  //     { name: "Line Chart", path: "/line-chart", pro: false },
+  //     { name: "Bar Chart", path: "/bar-chart", pro: false },
+  //   ],
+  // },
   {
     icon: <BoxCubeIcon />,
-    name: "UI Elements",
+    name: "Elements ",
     subItems: [
       { name: "Alerts", path: "/alerts", pro: false },
       { name: "Avatar", path: "/avatars", pro: false },
@@ -88,8 +91,7 @@ const othersItems: NavItem[] = [
     icon: <PlugInIcon />,
     name: "Authentication",
     subItems: [
-      { name: "Sign In", path: "/signin", pro: false },
-      { name: "Sign Up", path: "/signup", pro: false },
+      { name: "Sign In", path: "/signin", pro: false }, 
     ],
   },
 ];
@@ -311,20 +313,8 @@ const AppSidebar: React.FC = () => {
         <Link href="/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
-              <Image
-                className="dark:hidden"
-                src="/images/logo/logo.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
-              <Image
-                className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
-                alt="Logo"
-                width={150}
-                height={40}
-              />
+             
+              <h1 className="text-2xl font-bold text-white">Link Inc</h1>
             </>
           ) : (
             <Image
@@ -374,7 +364,6 @@ const AppSidebar: React.FC = () => {
             </div>
           </div>
         </nav>
-        {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null}
       </div>
     </aside>
   );
