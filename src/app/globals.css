@@ -6,13 +6,24 @@
 
 @layer base {
   body {
+    @apply relative text-base font-normal z-1 bg-gray-900 font-outfit;
+  }
+}
+
+@layer utilities {
+  .z-1 {
+    z-index: 1;
+  }
+}
+@layer base {
+  body {
     @apply relative text-base font-normal z-1 bg-gray-50 font-outfit;
   }
 }
 
 @layer components {
   .menu-item {
-    @apply relative flex items-center w-full gap-3 px-3 py-2 font-medium rounded-lg text-theme-sm;
+    @apply relative flex items-center w-full gap-3 px-3 py-2 font-medium rounded-lg text-sm;
   }
   .menu-item-active {
     @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
@@ -103,7 +114,7 @@
 }
 
 .apexcharts-tooltip.apexcharts-theme-light {
-  @apply gap-1 !rounded-lg !border-gray-200 p-3 !shadow-theme-sm dark:!border-gray-800 dark:!bg-gray-900;
+  @apply gap-1 !rounded-lg !border-gray-800 p-3 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_1px_3px_0px_rgba(16,24,40,0.1)] dark:!border-gray-800 dark:!bg-gray-900;
 }
 
 .apexcharts-tooltip-marker {
@@ -341,7 +352,7 @@
 
 .carouselThree .swiper-pagination-bullet,
 .carouselFour .swiper-pagination-bullet {
-  @apply !m-0 h-2.5 w-2.5 bg-white opacity-100 shadow-theme-xs duration-200 ease-in-out;
+  @apply !m-0 h-2.5 w-2.5 bg-white opacity-100 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06)] duration-200 ease-in-out;
 }
 
 .carouselThree .swiper-pagination-bullet-active,
@@ -390,4 +401,13 @@
     0px 1px 2px 0px rgba(16, 24, 40, 0.06);
   opacity: 0.8;
   cursor: grabbing; /* Changes the cursor to indicate dragging */
+}
+@layer components {
+  .modal-backdrop {
+    @apply fixed inset-0 bg-gray-900/50 backdrop-blur-sm;
+  }
+
+  .modal-content {
+    @apply relative bg-gradient-to-b from-gray-800/95 to-gray-900/95 backdrop-blur-md border border-gray-700/50 rounded-2xl shadow-xl;
+  }
 }
