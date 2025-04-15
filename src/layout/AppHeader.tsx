@@ -8,6 +8,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 const AppHeader: React.FC = () => {
   const [isApplicationMenuOpen, setApplicationMenuOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   const { isMobileOpen, toggleSidebar, toggleMobileSidebar } = useSidebar();
 
@@ -38,6 +40,16 @@ const AppHeader: React.FC = () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  const handleDropdownToggle = (type: 'notification' | 'user') => {
+    if (type === 'notification') {
+      setIsNotificationOpen(!isNotificationOpen);
+      setIsUserDropdownOpen(false);
+    } else {
+      setIsUserDropdownOpen(!isUserDropdownOpen);
+      setIsNotificationOpen(false);
+    }
+  };
 
   return (
     <header className="sticky top-0 flex w-full bg-white border-gray-200 z-[9999] dark:border-gray-800 dark:bg-gray-900 lg:border-b">
@@ -160,17 +172,17 @@ const AppHeader: React.FC = () => {
           } items-center justify-between w-full gap-4 px-5 py-4 lg:flex shadow-theme-md lg:justify-end lg:px-0 lg:shadow-none`}
         >
           <div className="flex items-center gap-2 2xsm:gap-3">
-            {/* <!-- Dark Mode Toggler --> */}
-            {/* <ThemeToggleButton /> */}
-            {/* <!-- Dark Mode Toggler --> */}
-
-           <NotificationDropdown /> 
-            {/* <!-- Notification Menu Area --> */}
-          </div>
-          {/* <!-- User Area --> */}
-          <UserDropdown /> 
+            <NotificationDropdown 
+              isOpen={isNotificationOpen}
+              onToggle={() => handleDropdownToggle('notification')}
+            /> 
+            <UserDropdown 
+              isOpen={isUserDropdownOpen}
+              onToggle={() => handleDropdownToggle('user')}
+            />
     
         </div>
+      </div>
       </div>
     </header>
   );

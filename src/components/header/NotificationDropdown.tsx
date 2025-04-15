@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 // Remove unused imports
-import React, { useState } from "react";
-import { Dropdown } from "../ui/dropdown/Dropdown";
 import { X as XIcon } from "lucide-react";
+import { useState } from "react";
+import { Dropdown } from "../ui/dropdown/Dropdown";
 
 // Notifications data remains the same
 const notifications = [
@@ -37,22 +37,20 @@ const notifications = [
   }
 ];
 
-export default function NotificationDropdown() {
-  const [isOpen, setIsOpen] = useState(false);
+interface NotificationDropdownProps {
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onToggle }) => {
   const [notifying, setNotifying] = useState(true);
 
-  function toggleDropdown() {
-    setIsOpen(!isOpen);
-  }
-
-  function closeDropdown() {
-    setIsOpen(false);
-  }
-
-  const handleClick = () => {
-    toggleDropdown();
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    onToggle();
     setNotifying(false);
   };
+
   return (
     <div className="relative">
       <button
@@ -83,12 +81,12 @@ export default function NotificationDropdown() {
       </button>
       <Dropdown
         isOpen={isOpen}
-        onClose={closeDropdown}
-        className="absolute right-0 mt-[17px] w-[330px] rounded-2xl border border-gray-800/50 bg-gray-900/95 p-4 shadow-xl backdrop-blur-md"
+        onClose={onToggle}
+        className="absolute right-0 mt-[17px] w-[330px] rounded-2xl border border-gray-800 bg-[#151C2C] p-4 shadow-xl"
       >
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-800/50">
-          <h3 className="text-lg font-medium text-white/90">Notification</h3>
-          <button onClick={closeDropdown} className="text-gray-400 hover:text-gray-300">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-800">
+          <h3 className="text-lg font-medium text-gray-100">Notification</h3>
+          <button onClick={onToggle} className="text-gray-400 hover:text-gray-200">
             <XIcon className="w-5 h-5" />
           </button>
         </div>
@@ -104,12 +102,12 @@ export default function NotificationDropdown() {
                   height={40}
                   className="rounded-full"
                 />
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-900 rounded-full" />
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#151C2C] rounded-full" />
               </div>
               
               <div className="flex-1">
                 <p className="text-sm text-gray-300">
-                  <span className="font-medium text-white/90">{notification.name}</span>
+                  <span className="font-medium text-gray-100">{notification.name}</span>
                   {" "}{notification.action}
                 </p>
                 <span className="text-xs text-gray-500">{notification.time}</span>
@@ -118,10 +116,12 @@ export default function NotificationDropdown() {
           ))}
         </div>
       
-        <button className="w-full px-4 py-2 mt-4 text-sm font-medium text-gray-300 transition-colors rounded-lg hover:bg-white/5 hover:text-gray-200">
+        <button className="w-full px-4 py-2 mt-4 text-sm font-medium text-gray-300 transition-colors rounded-lg hover:bg-gray-800 hover:text-gray-100">
           View All Notifications
         </button>
       </Dropdown>
     </div>
   );
-}
+};
+
+export default NotificationDropdown;

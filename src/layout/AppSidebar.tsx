@@ -15,13 +15,16 @@ import {
   UserCircleIcon
 } from "../icons/index";
 
+// Update the NavItem type to include an id
 type NavItem = {
   name: string;
   icon: React.ReactNode;
   path?: string;
+  id?: string;  // Add this line
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
+// Update the Message menu item to include an id
 const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
@@ -32,6 +35,7 @@ const navItems: NavItem[] = [
     icon: <UserCircleIcon />,
     name: "Admin Profile",
     path: "/profile",
+    id: "admin-profile"  // Add this line
   },
 
   {
@@ -53,7 +57,8 @@ const navItems: NavItem[] = [
   {
     icon: <UserCircleIcon />,
     name: "Message",
-    path: "/profile",
+    path: "/message",
+    id: "message"  // Add this line
   },
   
   // {
@@ -236,7 +241,16 @@ const AppSidebar: React.FC = () => {
   const subMenuRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // const isActive = (path: string) => path === pathname;
-   const isActive = useCallback((path: string) => path === pathname, [pathname]);
+   const isActive = useCallback((path: string, nav?: NavItem) => {
+     if (path === pathname) {
+       // Check if this is the message menu item
+       if (nav?.id === "message") {
+         return false; // Never show message as active when using temporary path
+       }
+       return true;
+     }
+     return false;
+   }, [pathname]);
 
   useEffect(() => {
     // Check if the current path matches any submenu item
