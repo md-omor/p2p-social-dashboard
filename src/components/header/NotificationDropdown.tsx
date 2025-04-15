@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
+// Remove unused imports
 import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { X as XIcon } from "lucide-react";
 
-// Add the notifications data
+// Notifications data remains the same
 const notifications = [
   {
     avatar: "/images/user/user-01.jpg",
